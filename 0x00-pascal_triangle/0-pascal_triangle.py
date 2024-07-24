@@ -1,12 +1,12 @@
 #!/usr/bin/python3
-''' pascal triangle module used to generate a pascal triangle
-'''
+""" pascal triangle module used to generate a pascal triangle
+"""
 
 
 def pascal_triangle(n):
-    '''creates a triangle of pascal based
+    """creates a triangle of pascal based
     on the provided number
-    '''
+    """
     new_list = []
     if type(n) is not int or n <= 0:
         return new_list
