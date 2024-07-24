@@ -7,7 +7,7 @@ pascal triangle function
 def pascal_triangle(n):
     """ pascal triangle function """
     new_list = []
-    if n <= 0:
+    if n <= 0 or type(n) is not int:
         return new_list
     for line in range(0, n):
         actual_row = [1] * (line + 1)
