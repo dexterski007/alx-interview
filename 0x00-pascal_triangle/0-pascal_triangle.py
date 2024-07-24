@@ -5,7 +5,7 @@
 def pascal_triangle(n):
     ''' pascal triangle function '''
     new_list = []
-    if n <= 0:
+    if type(n) is not int or n <= 0:
         return new_list
     for line in range(n):
         actual_row = []
