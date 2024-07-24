@@ -4,7 +4,7 @@
 
 
 def recursive_pascal(line, row):
-    '''recursive function for the calculation'''
+    """recursive function for the calculation"""
     if row == 0 or line == row:
         return 1
     return (recursive_pascal(line - 1, row - 1)
