@@ -7,6 +7,8 @@ pascal triangle function
 def pascal_triangle(n):
     """ pascal triangle function """
     new_list = []
+    if n <= 0:
+        return new_list
     for line in range(0, n):
         actual_row = [1] * (line + 1)
         for row in range(1, line):
