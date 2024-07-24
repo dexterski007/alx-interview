@@ -1,18 +1,20 @@
 #!/usr/bin/python3
-"""Triangle Triangle"""
+""" pascal triangle module used to generate a pascal triangle
+"""
 
 
 def pascal_triangle(n):
-    """Triangle"""
+    """creates a triangle of pascal based
+    on the provided number
+    """
     if n <= 0:
         return []
-    pas = [[1]]
-    for row_number in range(1, n):
-        row = [1]
-        for j in range(1, row_number):
-            element = pas[row_number - 1][j - 1] + pas[row_number - 1][j]
-            row.append(element)
-        row.append(1)
-        pas.append(row)
-
-    return pas
+    triangle = [[1]]
+    for line in range(1, n):
+        actual_row = [1]
+        for row in range(1, line):
+            item = triangle[line - 1][row - 1] + triangle[line - 1][row]
+            actual_row.append(item)
+        actual_row.append(1)
+        triangle.append(actual_row)
+    return triangle
