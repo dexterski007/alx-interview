@@ -3,18 +3,24 @@
 """
 
 
+def recursive_pascal(line, row):
+    '''recursive function for the calculation'''
+    if row == 0 or line == row:
+        return 1
+    return (recursive_pascal(line - 1, row - 1)
+            + recursive_pascal(line - 1, row))
+
+
 def pascal_triangle(n):
     """creates a triangle of pascal based
     on the provided number
     """
     if n <= 0:
         return []
-    triangle = [[1]]
-    for line in range(1, n):
-        actual_row = [1]
-        for row in range(1, line):
-            item = triangle[line - 1][row - 1] + triangle[line - 1][row]
-            actual_row.append(item)
-        actual_row.append(1)
-        triangle.append(actual_row)
+    triangle = []
+    for line in range(n):
+        sublist = []
+        for row in range(line + 1):
+            sublist.append(recursive_pascal(line, row))
+        triangle.append(sublist)
     return triangle
