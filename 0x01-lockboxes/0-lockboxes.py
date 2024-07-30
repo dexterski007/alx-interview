@@ -17,7 +17,6 @@ def canUnlockAll(boxes):
         if new_key not in unlocked_boxes and new_key < n:
             unlocked_boxes.add(new_key)
             keys.update(boxes[new_key])
-    print(unlocked_boxes)
     if len(unlocked_boxes) == len(boxes):
         return True
     return False
