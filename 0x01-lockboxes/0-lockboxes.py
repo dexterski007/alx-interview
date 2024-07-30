@@ -4,7 +4,10 @@
 
 
 def canUnlockAll(boxes):
-    """ unlock tester function """
+    """ unlock tester function
+        used to test all keys starting from the initial box,
+        and check wether all boxes can be opened or not
+    """
     n = len(boxes)
     unlocked_boxes = set([0])
     keys = set(boxes[0])
@@ -14,7 +17,7 @@ def canUnlockAll(boxes):
         if new_key not in unlocked_boxes and new_key < n:
             unlocked_boxes.add(new_key)
             keys.update(boxes[new_key])
-    print (unlocked_boxes)
+    print(unlocked_boxes)
     if len(unlocked_boxes) == len(boxes):
         return True
     return False
