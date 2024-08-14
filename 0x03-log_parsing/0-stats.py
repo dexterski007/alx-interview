@@ -29,7 +29,7 @@ def logparser():
                 if status_code in status_list:
                     statusholder[status_code] = statusholder.get(
                         status_code, 0) + 1
-                line_count += 1
+                    line_count += 1
             if line_count % 10 == 0:
                 print("File size: {}".format(totalsize))
                 for k, v in sorted(statusholder.items()):
