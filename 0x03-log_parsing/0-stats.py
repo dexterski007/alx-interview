@@ -7,14 +7,14 @@ import re
 
 def logparser():
     """ log parsing function """
-    pt = (
-        r'\s*(?P<ip>\S+)\s*',
-        r'\s*\[(?P<date>\d+\-\d+\-\d+ \d+:\d+:\d+\.\d+)\]',
-        r'\s*"(?P<request>[^"]*)"\s*',
-        r'\s*(?P<status_code>\S+)',
-        r'\s*(?P<file_size>\d+)'
+    pattern = (
+        r'\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}'
+        r' - \[\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}.\d+\]'
+        r' "GET /projects/260 HTTP/1.1"'
+        r' (.{3})'
+        r' (\d+)'
     )
-    compiled = '{}\\-{}{}{}{}\\s*'.format(pt[0], pt[1], pt[2], pt[3], pt[4])
+    compiled = re.compile(pattern)
     statusholder = {}
     totalsize = 0
     status_list = [200, 301, 400, 401, 403, 404, 405, 500]
@@ -25,8 +25,8 @@ def logparser():
             match = re.fullmatch(compiled, line)
             if match:
                 line_count += 1
-                status_code = match.group('status_code')
-                filesize = int(match.group('file_size'))
+                status_code = match.group(1)
+                filesize = int(match.group(2))
                 totalsize += filesize
                 if status_code in status_list and status_code.isdecimal() :
                     statusholder[status_code] = statusholder.get(
