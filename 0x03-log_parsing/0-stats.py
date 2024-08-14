@@ -17,20 +17,25 @@ def logparser():
     statusholder = {}
     totalsize = 0
     status_list = [200, 301, 400, 401, 403, 404, 405, 500]
+    line_count = 0
     try:
         for line in sys.stdin:
-            for i in range(10):
-                match = re.match(compiled, line)
-                if match is not None:
-                    status_code = int(match.group(4))
-                    filesize = int(match.group(5))
-                    totalsize += filesize
-                    if status_code in status_list:
-                        statusholder[status_code] = statusholder.get(
-                            status_code, 0) + 1
-            print("File size: {}".format(totalsize))
-            for k, v in sorted(statusholder.items()):
-                print("{}: {}".format(k, v))
+            match = re.match(compiled, line)
+            if match is not None:
+                status_code = match.group(4)
+                if status_code.isdigit():
+                    status_code = int(status_code)
+                filesize = int(match.group(5))
+                totalsize += filesize
+                if status_code in status_list:
+                    statusholder[status_code] = statusholder.get(
+                        status_code, 0) + 1
+                line_count += 1
+            if line_count % 10 == 0:
+                print("File size: {}".format(totalsize))
+                for k, v in sorted(statusholder.items()):
+                    print("{}: {}".format(k, v))
+            
     except KeyboardInterrupt:
         print("File size: {}".format(totalsize))
         for k, v in sorted(statusholder.items()):
