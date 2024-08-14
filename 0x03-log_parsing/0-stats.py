@@ -23,9 +23,7 @@ def logparser():
         for line in sys.stdin:
             match = re.match(compiled, line)
             if match is not None:
-                status_code = match.group('status_code')
-                if status_code.isdigit():
-                    status_code = int(status_code)
+                status_code = int(match.group('status_code'))
                 filesize = int(match.group('file_size'))
                 totalsize += filesize
                 if status_code in status_list:
@@ -35,7 +33,7 @@ def logparser():
             if line_count % 10 == 0:
                 print("File size: {}".format(totalsize))
                 for k, v in sorted(statusholder.items()):
-                    print("{}: {}".format(k, v))
+                    print('{}: {}'.format(k, v))
 
     except KeyboardInterrupt:
         print("File size: {}".format(totalsize))
