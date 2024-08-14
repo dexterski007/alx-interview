@@ -28,9 +28,10 @@ def logparser():
                 status_code = match.group(1)
                 filesize = int(match.group(2))
                 totalsize += filesize
-                if status_code in status_list and status_code.isdecimal() :
-                    statusholder[status_code] = statusholder.get(
-                        status_code, 0) + 1
+                if status_code.isdecimal() :
+                    if int(status_code) in status_list:
+                        statusholder[status_code] = statusholder.get(
+                            status_code, 0) + 1
                 if line_count % 10 == 0:
                     print("File size: {}".format(totalsize))
                     for k, v in sorted(statusholder.items()):
