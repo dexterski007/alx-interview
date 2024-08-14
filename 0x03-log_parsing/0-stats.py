@@ -8,7 +8,9 @@ import re
 def logparser():
     """ log parsing function """
     pattern = (
-        r'\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3} - \[\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}.\d+\] "GET /projects/260 HTTP/1.1" (.{3}) (\d+)'
+        r'\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}'
+        r' - \[\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}.\d+\]'
+        r' "GET /projects/260 HTTP/1.1" (.{3}) (\d+)'
     )
     compiled = re.compile(pattern)
     statusholder = {}
@@ -33,11 +35,10 @@ def logparser():
                     for k, v in sorted(statusholder.items()):
                         print('{}: {}'.format(k, v))
 
-    except KeyboardInterrupt:
+    finally:
         print("File size: {}".format(totalsize))
         for k, v in sorted(statusholder.items()):
             print("{}: {}".format(k, v))
-        exit
 
 
 if __name__ == "__main__":
