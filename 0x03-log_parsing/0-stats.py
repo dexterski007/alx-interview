@@ -28,7 +28,7 @@ def logparser():
                 status_code = match.group(1)
                 filesize = int(match.group(2))
                 totalsize += filesize
-                if status_code.isdecimal() :
+                if status_code.isdecimal():
                     if int(status_code) in status_list:
                         statusholder[status_code] = statusholder.get(
                             status_code, 0) + 1
