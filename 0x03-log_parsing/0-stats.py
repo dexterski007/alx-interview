@@ -21,7 +21,8 @@ def logparser():
     line_count = 0
     try:
         for line in sys.stdin:
-            match = re.match(compiled, line)
+            line = line.strip()
+            match = re.fullmatch(compiled, line)
             if match is not None:
                 status_code = int(match.group('status_code'))
                 filesize = int(match.group('file_size'))
