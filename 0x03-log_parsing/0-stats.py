@@ -7,12 +7,14 @@ import re
 
 def logparser():
     """ log parsing function """
-    pattern = (
-        r'\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}'
-        r' - \[\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}.\d+\]'
-        r' "GET /projects/260 HTTP/1.1" (.{3}) (\d+)'
+    pt = (
+        r'\s*(?P<ip>\S+)\s*',
+        r'\s*\[(?P<date>\d+\-\d+\-\d+ \d+:\d+:\d+\.\d+)\]',
+        r'\s*"(?P<request>[^"]*)"\s*',
+        r'\s*(?P<status_code>\S+)',
+        r'\s*(?P<file_size>\d+)'
     )
-    compiled = re.compile(pattern)
+    pattern = '{}\\-{}{}{}{}\\s*'.format(pt[0], pt[1], pt[2], pt[3], pt[4])
     statusholder = {}
     totalsize = 0
     status_list = [200, 301, 400, 401, 403, 404, 405, 500]
@@ -20,11 +22,11 @@ def logparser():
     try:
         for line in sys.stdin:
             line = line.strip()
-            match = compiled.fullmatch(line)
+            match = re.fullmatch(pattern, line)
             if (match):
                 line_count += 1
-                status_code = match.group(1)
-                filesize = int(match.group(2))
+                status_code = match.group('status_code')
+                filesize = int(match.group('file_size'))
                 totalsize += filesize
                 if status_code.isdecimal():
                     if int(status_code) in status_list:
@@ -35,7 +37,7 @@ def logparser():
                     for k, v in sorted(statusholder.items()):
                         print('{}: {}'.format(k, v))
 
-    except (KeyboardInterrupt, EOFError):
+    finally:
         print("File size: {}".format(totalsize))
         for k, v in sorted(statusholder.items()):
             print("{}: {}".format(k, v))
