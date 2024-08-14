@@ -35,7 +35,7 @@ def logparser():
                     for k, v in sorted(statusholder.items()):
                         print('{}: {}'.format(k, v))
 
-    finally:
+    except (KeyboardInterrupt, EOFError):
         print("File size: {}".format(totalsize))
         for k, v in sorted(statusholder.items()):
             print("{}: {}".format(k, v))
