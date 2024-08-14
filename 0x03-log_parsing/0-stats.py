@@ -35,7 +35,7 @@ def logparser():
                 print("File size: {}".format(totalsize))
                 for k, v in sorted(statusholder.items()):
                     print("{}: {}".format(k, v))
-            
+
     except KeyboardInterrupt:
         print("File size: {}".format(totalsize))
         for k, v in sorted(statusholder.items()):
