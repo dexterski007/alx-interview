@@ -22,7 +22,7 @@ def logparser():
     try:
         for line in sys.stdin:
             line = line.strip()
-            match = re.fullmatch(compiled, line)
+            match = compiled.fullmatch(line)
             if match:
                 line_count += 1
                 status_code = match.group(1)
