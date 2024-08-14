@@ -8,11 +8,7 @@ import re
 def logparser():
     """ log parsing function """
     pattern = (
-        r'\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}'
-        r' - \[\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}.\d+\]'
-        r' "GET /projects/260 HTTP/1.1"'
-        r' (.{3})'
-        r' (\d+)'
+        r'\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3} - \[\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}.\d+\] "GET /projects/260 HTTP/1.1" (.{3}) (\d+)'
     )
     compiled = re.compile(pattern)
     statusholder = {}
@@ -23,7 +19,7 @@ def logparser():
         for line in sys.stdin:
             line = line.strip()
             match = compiled.fullmatch(line)
-            if match:
+            if (match):
                 line_count += 1
                 status_code = match.group(1)
                 filesize = int(match.group(2))
