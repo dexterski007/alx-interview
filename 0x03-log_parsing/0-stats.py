@@ -5,7 +5,7 @@ import sys
 import re
 
 
-def logparser():
+def main():
     """ log parsing function """
     pattern = (
         r'^(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}) - '
@@ -45,4 +45,4 @@ def logparser():
 
 if __name__ == "__main__":
     """ main entry point"""
-    logparser()
+    main()
