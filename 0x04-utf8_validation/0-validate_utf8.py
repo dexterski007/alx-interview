@@ -17,7 +17,7 @@ def validUTF8(data):
             if byte & 0b11111000 == 0b11110000:
                 num_bytes += 3
             return False
-        
+
         if num_bytes > 0:
             if not byte & 0b11000000 == 0b10000000:
                 return False
@@ -25,4 +25,3 @@ def validUTF8(data):
     if num_bytes == 0:
         return True
     return False
-            
