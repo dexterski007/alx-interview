@@ -1,12 +1,20 @@
 #!/usr/bin/python3
-""" 2d matrix rotation """
+""" make change function """
 
 
-def rotate_2d_matrix(matrix):
-    """ rotate 2d matrix module """
-    length = len(matrix)
-    for i in range(length):
-        for j in range(i, length):
-            matrix[i][j], matrix[j][i] = matrix[j][i], matrix[i][j]
-    for i in range(length):
-        matrix[i].reverse()
+def makeChange(coins, total):
+    """ make change function """
+    if total <= 0:
+        return 0
+    coin_num = 0
+    sorted_list = sorted(coins, reverse=True)
+    for coin in sorted_list:
+        if total == 0:
+            break
+        change = total // coin
+        total -= change * coin
+        coin_num += change
+    if total == 0:
+        return coin_num
+    else:
+        return -1
