@@ -2,7 +2,7 @@
 """ make change function """
 
 
-def makeChange(coins: list[int], total: int) -> int:
+def makeChange(coins, total):
     """ make change function """
     if total <= 0:
         return 0
