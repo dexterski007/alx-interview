@@ -3,15 +3,16 @@
 
 
 def primelist(num):
-    """ fucntion to create and return prime lists"""
+    """ function to create and return prime lists"""
     primes = [True for i in range(num + 1)]
     p = 2
-    while (p * p <= num + 1):
+    while (p * p <= num):
         if (primes[p]):
             for i in range(p * p, num + 1, p):
                 primes[i] = False
         p += 1
-    return primes
+    prime_numbers = [p for p in range(2, num + 1) if primes[p]]
+    return prime_numbers
 
 
 def isWinner(x, nums):
