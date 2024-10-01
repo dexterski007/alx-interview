@@ -20,8 +20,8 @@ def isWinner(x, nums):
         return None
     Maria = 0
     Ben = 0
-    for num in nums:
-        primes = primelist(num)
+    for i in range(x):
+        primes = primelist(nums[i])
         if len(primes) % 2 == 0:
             Ben += 1
         else:
