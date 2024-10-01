@@ -6,7 +6,7 @@ def primelist(num):
     """ fucntion to create and return prime lists"""
     primes = [True for i in range(num + 1)]
     p = 2
-    while (p * p <= num):
+    while (p * p <= num + 1):
         if (primes[p]):
             for i in range(p * p, num + 1, p):
                 primes[i] = False
